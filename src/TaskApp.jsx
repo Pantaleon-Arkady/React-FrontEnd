@@ -2,7 +2,7 @@ function TaskApp() {
     return (
         <div>
             <span>
-                Task List Component
+                Task List Components
             </span>
         </div>
     )
