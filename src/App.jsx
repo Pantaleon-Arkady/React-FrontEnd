@@ -6,7 +6,7 @@ function Home() {
     return (
         <div>
             <h2>Initial Page</h2>
-            <Link to="/task-app" >Task App</Link>
+            <Link to="/task-app" className="btn btn-primary m-2" >Task App</Link>
         </div>
     )
 }
