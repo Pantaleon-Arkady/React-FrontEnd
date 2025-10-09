@@ -23,7 +23,10 @@ function TaskApp() {
         setTasks(newTasks);
     };
 
-
+    const resetTasks = () => {
+        setTasks(defaultTasks);
+        localStorage.removeItem("tasks");
+    };
 
     return (
         <div>
@@ -32,6 +35,7 @@ function TaskApp() {
                 tasks={tasks}
                 onDelete={handleDeleteTask}
             />
+            <button onClick={resetTasks} className="btn btn-warning mt-3">Reset</button>
         </div>
     )
 }
