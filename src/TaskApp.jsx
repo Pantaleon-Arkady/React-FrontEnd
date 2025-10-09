@@ -1,4 +1,5 @@
 import TaskList from "./TaskList";
+import { useState, useEffect } from "react";
 
 function TaskApp() {
     const defaultTasks = [
@@ -8,12 +9,21 @@ function TaskApp() {
         { id: 4, text: "- Bob Ross" }
     ];
 
+    const [tasks, setTasks] = useState(() => {
+        const saved = localStorage.getItem("tasks");
+        return saved ? JSON.parse(saved) : defaultTasks;
+      });
+    
+      useEffect(() => {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }, [tasks]);
+
 
     return (
         <div>
             <h2>Task List</h2>
             <TaskList 
-                tasks={defaultTasks}
+                tasks={tasks}
             />
         </div>
     )
