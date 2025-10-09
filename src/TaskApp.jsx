@@ -12,18 +12,25 @@ function TaskApp() {
     const [tasks, setTasks] = useState(() => {
         const saved = localStorage.getItem("tasks");
         return saved ? JSON.parse(saved) : defaultTasks;
-      });
-    
-      useEffect(() => {
+    });
+
+    useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
-      }, [tasks]);
+    }, [tasks]);
+
+    const handleDeleteTask = (taskId) => {
+        const newTasks = tasks.filter(task => task.id !== taskId);
+        setTasks(newTasks);
+    };
+
 
 
     return (
         <div>
             <h2>Task List</h2>
-            <TaskList 
+            <TaskList
                 tasks={tasks}
+                onDelete={handleDeleteTask}
             />
         </div>
     )
