@@ -11,8 +11,13 @@ function TaskList({tasks, onDelete}) {
                         {task.text}
                     </span>
                     <div>
+                        <button
+                            className="btn btn-primary"
+                        >
+                            Edit
+                        </button>
                         <button 
-                            className="btn btn-danger rounded"
+                            className="btn btn-danger"
                             onClick={() => onDelete(task.id)}
                         >
                             Delete

@@ -41,21 +41,34 @@ function TaskApp() {
     };
 
     return (
-        <div>
+        <div className="container my-4 bg-light w-100">
             <h2>Task List</h2>
-            <button onClick={displayForm} className="btn btn-outline-primary" aria-label="create">+</button>
-            {
-                showForm && 
-                <TaskForm
-                    onCreate={handleCreateTask}
-                    onClose={() => setShowForm(false)}
-                />
-            }
+            <div className="d-flex align-items-center w-100 gap-2 justify-content-center">
+                <button
+                    onClick={displayForm}
+                    className="btn btn-outline-primary flex-shrink-0 create_btn"
+                    aria-label="create"
+                >
+                    +
+                </button>
+                {showForm && (
+                    <div className="flex-grow-1">
+                        <TaskForm
+                            onCreate={handleCreateTask}
+                            onClose={() => setShowForm(false)}
+                        />
+                    </div>
+                )}
+            </div>
+
             <TaskList
                 tasks={tasks}
                 onDelete={handleDeleteTask}
             />
-            <button onClick={resetTasks} className="btn btn-warning mt-3">Reset</button>
+
+            <button onClick={resetTasks} className="btn btn-warning mt-3">
+                Reset
+            </button>
         </div>
     )
 }
