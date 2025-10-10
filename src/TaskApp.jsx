@@ -30,6 +30,11 @@ function TaskApp() {
         setTasks(newTasks);
     };
 
+    const handleCreateTask = (text) => {
+        const newTask = { id: Date.now(), text, done: false };
+        setTasks([...tasks, newTask]);
+    };
+
     const resetTasks = () => {
         setTasks(defaultTasks);
         localStorage.removeItem("tasks");
@@ -39,7 +44,13 @@ function TaskApp() {
         <div>
             <h2>Task List</h2>
             <button onClick={displayForm} className="btn btn-outline-primary" aria-label="create">+</button>
-            {showForm && <TaskForm />}
+            {
+                showForm && 
+                <TaskForm
+                    onCreate={handleCreateTask}
+                    onClose={() => setShowForm(false)}
+                />
+            }
             <TaskList
                 tasks={tasks}
                 onDelete={handleDeleteTask}
