@@ -1,11 +1,12 @@
 import TaskList from "./TaskList";
+import TaskForm from "./TaskForm";
 import { useState, useEffect } from "react";
 
 function TaskApp() {
     const defaultTasks = [
-        { id: 1, text: "Talent is a pursued interest." },
-        { id: 2, text: "Anything you are willing to practice you can do." },
-        { id: 3, text: "I can't do this, I can't do it — that's balogna." },
+        { id: 1, text: "I can't do this, I can't do it — that's balogna." },
+        { id: 2, text: "Talent is a pursued interest." },
+        { id: 3, text: "Anything you are willing to practice you can do." },
         { id: 4, text: "- Bob Ross" }
     ];
 
@@ -17,6 +18,12 @@ function TaskApp() {
     useEffect(() => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }, [tasks]);
+
+    const [showForm, setShowForm] = useState(false);
+
+    const displayForm = () => {
+        setShowForm(prev => !prev);
+    }
 
     const handleDeleteTask = (taskId) => {
         const newTasks = tasks.filter(task => task.id !== taskId);
@@ -31,6 +38,8 @@ function TaskApp() {
     return (
         <div>
             <h2>Task List</h2>
+            <button onClick={displayForm} className="btn btn-outline-primary" aria-label="create">+</button>
+            {showForm && <TaskForm />}
             <TaskList
                 tasks={tasks}
                 onDelete={handleDeleteTask}
