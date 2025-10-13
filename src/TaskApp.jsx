@@ -1,76 +1,85 @@
 import TaskList from "./TaskList";
-import TaskForm from "./TaskForm";
+import CreateTask from "./CreateTask";
+import EditTask from "./EditTask";
 import { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 
 function TaskApp() {
-    const defaultTasks = [
-        { id: 1, text: "I can't do this, I can't do it — that's balogna." },
-        { id: 2, text: "Talent is a pursued interest." },
-        { id: 3, text: "Anything you are willing to practice you can do." },
-        { id: 4, text: "- Bob Ross" }
-    ];
+  const defaultTasks = [
+    { id: 1, text: "I can't do this, I can't do it — that's balogna." },
+    { id: 2, text: "Talent is a pursued interest." },
+    { id: 3, text: "Anything you are willing to practice you can do." },
+    { id: 4, text: "- Bob Ross" },
+  ];
 
-    const [tasks, setTasks] = useState(() => {
-        const saved = localStorage.getItem("tasks");
-        return saved ? JSON.parse(saved) : defaultTasks;
-    });
+  const [tasks, setTasks] = useState(() => {
+    const saved = localStorage.getItem("tasks");
+    return saved ? JSON.parse(saved) : defaultTasks;
+  });
 
-    useEffect(() => {
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-    }, [tasks]);
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
-    const [showForm, setShowForm] = useState(false);
+  const [showCreate, setShowCreate] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [currentTask, setCurrentTask] = useState(null);
 
-    const displayForm = () => {
-        setShowForm(prev => !prev);
-    }
+  const handleCreateTask = (text) => {
+    const newTask = { id: Date.now(), text };
+    setTasks([...tasks, newTask]);
+  };
 
-    const handleDeleteTask = (taskId) => {
-        const newTasks = tasks.filter(task => task.id !== taskId);
-        setTasks(newTasks);
-    };
+  const handleDeleteTask = (taskId) => {
+    setTasks(tasks.filter((t) => t.id !== taskId));
+  };
 
-    const handleCreateTask = (text) => {
-        const newTask = { id: Date.now(), text, done: false };
-        setTasks([...tasks, newTask]);
-    };
+  const handleEditClick = (task) => {
+    setCurrentTask(task);
+    setShowEdit(true);
+  };
 
-    const resetTasks = () => {
-        setTasks(defaultTasks);
-        localStorage.removeItem("tasks");
-    };
+  const handleUpdateTask = (taskId, newText) => {
+    setTasks(tasks.map((t) => (t.id === taskId ? { ...t, text: newText } : t)));
+  };
 
-    return (
-        <div className="container my-4 bg-light w-100">
-            <h2>Task List</h2>
-            <div className="d-flex align-items-center w-100 gap-2 justify-content-center">
-                <button
-                    onClick={displayForm}
-                    className="btn btn-outline-primary flex-shrink-0 create_btn"
-                    aria-label="create"
-                >
-                    +
-                </button>
-                {showForm && (
-                    <div className="flex-grow-1">
-                        <TaskForm
-                            onCreate={handleCreateTask}
-                            onClose={() => setShowForm(false)}
-                        />
-                    </div>
-                )}
-            </div>
+  const resetTasks = () => {
+    setTasks(defaultTasks);
+    localStorage.removeItem("tasks");
+  };
 
-            <TaskList
-                tasks={tasks}
-                onDelete={handleDeleteTask}
-            />
+  return (
+    <div className="container my-4 bg-light w-100 p-3 rounded">
+      <h2 className="text-center mb-3">Task List</h2>
 
-            <button onClick={resetTasks} className="btn btn-warning mt-3">
-                Reset
-            </button>
-        </div>
-    )
+      <div className="d-flex justify-content-center mb-3">
+        <Button variant="primary" onClick={() => setShowCreate(true)}>
+          + Create Task
+        </Button>
+      </div>
+
+      <TaskList tasks={tasks} onDelete={handleDeleteTask} onEdit={handleEditClick} />
+
+      <div className="text-center mt-3">
+        <Button variant="warning" onClick={resetTasks}>
+          Reset
+        </Button>
+      </div>
+
+      <CreateTask
+        show={showCreate}
+        onCreate={handleCreateTask}
+        onClose={() => setShowCreate(false)}
+      />
+
+      <EditTask
+        show={showEdit}
+        task={currentTask}
+        onUpdate={handleUpdateTask}
+        onClose={() => setShowEdit(false)}
+      />
+    </div>
+  );
 }
 
 export default TaskApp;
