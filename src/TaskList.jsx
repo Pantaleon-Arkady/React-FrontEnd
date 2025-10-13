@@ -1,9 +1,11 @@
-function TaskList({tasks, onDelete}) {
+import { Button } from "react-bootstrap";
+
+function TaskList({ tasks, onDelete, onEdit }) {
 
     return (
         <ul className="list-group mt-3">
             {tasks.map(task => (
-                <li 
+                <li
                     className="list-group-item d-flex justify-content-between"
                     key={task.id}
                 >
@@ -11,17 +13,18 @@ function TaskList({tasks, onDelete}) {
                         {task.text}
                     </span>
                     <div>
-                        <button
-                            className="btn btn-primary"
+                        <Button
+                            variant="outline-primary"
+                            onClick={() => onEdit(task)}
                         >
                             Edit
-                        </button>
-                        <button 
-                            className="btn btn-danger"
+                        </Button>
+                        <Button
+                            variant="outline-danger"
                             onClick={() => onDelete(task.id)}
                         >
                             Delete
-                        </button>
+                        </Button>
                     </div>
                 </li>
             ))}
