@@ -1,28 +1,45 @@
 import { useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
 
-function CreateTask({ onCreate, task = "", onClose }) {
+function CreateTask({ show, onCreate, onClose, task = "" }) {
   const [text, setText] = useState(task);
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (text.trim() === "") return;
 
     onCreate(text);
     setText("");
     onClose();
-  }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="d-flex gap-2 mb-3">
-      <input
-        type="text"
-        className="form-control"
-        placeholder="Enter a task..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button type="submit" className="btn btn-primary">Add Task</button>
-    </form>
+    <Modal show={show} onHide={onClose} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Add New Task</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="taskInput">
+            <Form.Control
+              type="text"
+              placeholder="Enter a task..."
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              autoFocus
+            />
+          </Form.Group>
+          <div className="d-flex justify-content-end mt-3">
+            <Button variant="secondary" onClick={onClose} className="me-2">
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit">
+              Add Task
+            </Button>
+          </div>
+        </Form>
+      </Modal.Body>
+    </Modal>
   );
 }
 
