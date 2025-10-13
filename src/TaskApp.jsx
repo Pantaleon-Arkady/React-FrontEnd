@@ -1,6 +1,7 @@
 import TaskList from "./TaskList";
-import TaskForm from "./TaskForm";
+import CreateTask from "./CreateTask";
 import { useState, useEffect } from "react";
+import { Button } from 'react-bootstrap';
 
 function TaskApp() {
     const defaultTasks = [
@@ -44,16 +45,15 @@ function TaskApp() {
         <div className="container my-4 bg-light w-100">
             <h2>Task List</h2>
             <div className="d-flex align-items-center w-100 gap-2 justify-content-center">
-                <button
+                <Button
                     onClick={displayForm}
-                    className="btn btn-outline-primary flex-shrink-0 create_btn"
-                    aria-label="create"
+                    className="btn btn-outline-primary flex-shrink-0 create_btn text-white"
                 >
                     +
-                </button>
+                </Button>
                 {showForm && (
                     <div className="flex-grow-1">
-                        <TaskForm
+                        <CreateTask
                             onCreate={handleCreateTask}
                             onClose={() => setShowForm(false)}
                         />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function TaskForm({ onCreate, task = "", onClose }) {
+function CreateTask({ onCreate, task = "", onClose }) {
   const [text, setText] = useState(task);
 
   function handleSubmit(e) {
@@ -26,4 +26,4 @@ function TaskForm({ onCreate, task = "", onClose }) {
   );
 }
 
-export default TaskForm;
+export default CreateTask;
