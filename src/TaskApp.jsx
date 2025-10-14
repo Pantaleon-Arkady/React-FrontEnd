@@ -3,6 +3,7 @@ import CreateTask from "./CreateTask";
 import EditTask from "./EditTask";
 import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function TaskApp() {
   const defaultTasks = [
@@ -49,35 +50,42 @@ function TaskApp() {
   };
 
   return (
-    <div className="container my-4 bg-light w-100 p-3 rounded">
-      <h2 className="text-center mb-3">Task List</h2>
+    <div>
+        <div className="d-flex">
+            <Link to="/" className="btn btn-primary">
+                Back
+            </Link>
+        </div>
+        <div className="container my-4 bg-light w-100 p-3 rounded">
+        <h2 className="text-center mb-3">Task List</h2>
 
-      <div className="d-flex justify-content-center mb-3">
-        <Button variant="primary" onClick={() => setShowCreate(true)}>
-          + Create Task
-        </Button>
-      </div>
+        <div className="d-flex justify-content-center mb-3">
+            <Button variant="primary" onClick={() => setShowCreate(true)}>
+            + Create Task
+            </Button>
+        </div>
 
-      <TaskList tasks={tasks} onDelete={handleDeleteTask} onEdit={handleEditClick} />
+        <TaskList tasks={tasks} onDelete={handleDeleteTask} onEdit={handleEditClick} />
 
-      <div className="text-center mt-3">
-        <Button variant="warning" onClick={resetTasks}>
-          Reset
-        </Button>
-      </div>
+        <div className="text-center mt-3">
+            <Button variant="warning" onClick={resetTasks}>
+            Reset
+            </Button>
+        </div>
 
-      <CreateTask
-        show={showCreate}
-        onCreate={handleCreateTask}
-        onClose={() => setShowCreate(false)}
-      />
+        <CreateTask
+            show={showCreate}
+            onCreate={handleCreateTask}
+            onClose={() => setShowCreate(false)}
+        />
 
-      <EditTask
-        show={showEdit}
-        task={currentTask}
-        onUpdate={handleUpdateTask}
-        onClose={() => setShowEdit(false)}
-      />
+        <EditTask
+            show={showEdit}
+            task={currentTask}
+            onUpdate={handleUpdateTask}
+            onClose={() => setShowEdit(false)}
+        />
+        </div>
     </div>
   );
 }
