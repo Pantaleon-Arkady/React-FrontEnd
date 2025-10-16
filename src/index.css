@@ -31,3 +31,17 @@ body {
         background-color: #ffffff;
     }
 }
+
+/* Reminders */
+
+.reminders_text {
+    width: 70%;
+}
+
+.reminders_date {
+    width: 20%;
+}
+
+.reminders_mod {
+    width: 10%;
+}
