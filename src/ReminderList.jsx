@@ -6,8 +6,8 @@ function ReminderList({ reminders }) {
         <ul className="list-group mt-3">
             {reminders.map(reminder => (
                 <li className="list-group-item d-flex">
-                    <div className="reminders_text border">
-                        <span>
+                    <div className="reminders_text border text-start">
+                        <span className="border">
                             {reminder.text}
                         </span>
                     </div>
