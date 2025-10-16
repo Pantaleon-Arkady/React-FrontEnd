@@ -11,8 +11,8 @@ function ReminderList({ reminders }) {
                             {reminder.text}
                         </span>
                     </div>
-                    <div className="reminders_date border">
-
+                    <div className="reminders_date border text-start">
+                        {new Date(reminder.date).toLocaleDateString()} {new Date(reminder.date).toLocaleTimeString()}
                     </div>
                     <div className="reminders_mod border">
 
