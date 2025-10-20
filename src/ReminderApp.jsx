@@ -24,6 +24,11 @@ function ReminderApp() {
         setReminders(reminders.filter((reminder) => reminder.id !== reminderId))
     };
 
+    const resetReminder = () => {
+        setReminders(defaultReminders);
+        localStorage.removeItem('reminders');
+    }
+
     return (
         <div>
             <div className="d-flex">
@@ -37,6 +42,12 @@ function ReminderApp() {
                     reminders={reminders}
                     onDelete={handleDeleteReminder}
                 />
+                <button 
+                    onClick={() => resetReminder()}
+                    className="btn btn-warning"
+                >
+                    Reset
+                </button>
             </div>
         </div>
     )
