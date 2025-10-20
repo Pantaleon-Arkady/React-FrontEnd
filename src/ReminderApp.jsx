@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReminderList from "./ReminderList";
+import CreateReminder from "./CreateReminder";
 
 function ReminderApp() {
     const defaultReminders = [
-        { id: 1, text: 'First Reminder, adding a few more words to test the visual space when displayed', date: new Date("2025-10-20T10:00:00")},
-        { id: 2, text: 'Second Reminder, adding a few more words to test the visual space when displayed', date: new Date("2025-10-20T10:00:00")},
-        { id: 3, text: 'Third Reminder, adding a few more words to test the visual space when displayed', date: new Date("2025-10-20T10:00:00")},
-        { id: 4, text: 'Fourth Reminder, adding a few more words to test the visual space when displayed', date: new Date("2025-10-20T10:00:00")},
-        { id: 5, text: 'Fifth Reminder, adding a few more words to test the visual space when displayed', date: new Date("2025-10-20T10:00:00")},
+        { id: 1, text: 'First Reminder, adding a few more words to test the visual space when displayed', date: new Date("2025-10-20T10:00:00") },
+        { id: 2, text: 'Second Reminder, adding a few more words to test the visual space when displayed', date: new Date("2025-10-20T10:00:00") },
+        { id: 3, text: 'Third Reminder, adding a few more words to test the visual space when displayed', date: new Date("2025-10-20T10:00:00") },
+        { id: 4, text: 'Fourth Reminder, adding a few more words to test the visual space when displayed', date: new Date("2025-10-20T10:00:00") },
+        { id: 5, text: 'Fifth Reminder, adding a few more words to test the visual space when displayed', date: new Date("2025-10-20T10:00:00") },
     ];
 
-    const [reminders, setReminders] =  useState(() => {
+    const [reminders, setReminders] = useState(() => {
         const saved = localStorage.getItem("reminders");
         return saved ? JSON.parse(saved) : defaultReminders;
     });
@@ -29,6 +30,16 @@ function ReminderApp() {
         localStorage.removeItem('reminders');
     }
 
+    const [showForm, setShowForm] = useState(false);
+
+    const displayForm = () => {
+        setShowForm(prev => !prev);
+    };
+
+    const handleCreateReminder = (reminder) => {
+        setReminders([...reminders, reminder]);
+    };
+
     return (
         <div>
             <div className="d-flex">
@@ -38,11 +49,22 @@ function ReminderApp() {
             </div>
             <div>
                 <h2>Reminders</h2>
+                <button
+                    onClick={displayForm}
+                    className="btn btn-outline-primary"
+                    aria-label="create"
+                >+</button>
+                {
+                    showForm && <CreateReminder
+                        onAdd={handleCreateReminder}
+                        onClose={displayForm}
+                    />
+                }
                 <ReminderList
                     reminders={reminders}
                     onDelete={handleDeleteReminder}
                 />
-                <button 
+                <button
                     onClick={() => resetReminder()}
                     className="btn btn-warning"
                 >
