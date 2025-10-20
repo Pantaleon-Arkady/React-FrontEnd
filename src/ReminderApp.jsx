@@ -16,6 +16,10 @@ function ReminderApp() {
         return saved ? JSON.parse(saved) : defaultReminders;
     });
 
+    useEffect(() => {
+        localStorage.setItem("reminders", JSON.stringify(reminders))
+    }, [reminders]);
+
     const handleDeleteReminder = (reminderId) => {
         setReminders(reminders.filter((reminder) => reminder.id !== reminderId))
     };
