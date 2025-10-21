@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CreateReminder({ onClose, onAdd }) {
+function ReminderCreate({ onClose, onAdd }) {
     const [text, setText] = useState("");
     const [dateTime, setDateTime] = useState("");
 
@@ -56,4 +56,4 @@ function CreateReminder({ onClose, onAdd }) {
     )
 };
 
-export default CreateReminder;
+export default ReminderCreate;

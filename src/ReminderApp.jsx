@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReminderList from "./ReminderList";
-import CreateReminder from "./CreateReminder";
+import ReminderCreate from "./ReminderCreate";
+import ReminderEdit from "./ReminderEdit";
 
 function ReminderApp() {
     const defaultReminders = [
@@ -55,7 +56,7 @@ function ReminderApp() {
                     aria-label="create"
                 >+</button>
                 {
-                    showForm && <CreateReminder
+                    showForm && <ReminderCreate
                         onAdd={handleCreateReminder}
                         onClose={displayForm}
                     />
@@ -64,6 +65,7 @@ function ReminderApp() {
                     reminders={reminders}
                     onDelete={handleDeleteReminder}
                 />
+                <ReminderEdit />
                 <button
                     onClick={() => resetReminder()}
                     className="btn btn-warning"
