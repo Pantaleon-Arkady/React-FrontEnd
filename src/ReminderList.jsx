@@ -1,4 +1,4 @@
-function ReminderList({ reminders }) {
+function ReminderList({ reminders, onDelete }) {
 
 
 
@@ -15,7 +15,16 @@ function ReminderList({ reminders }) {
                         {new Date(reminder.date).toLocaleDateString()} {new Date(reminder.date).toLocaleTimeString()}
                     </div>
                     <div className="reminders_mod border">
-
+                        <div className="dropdown">
+                            <button type="button" className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                Mod
+                            </button>
+                            <ul className="dropdown-menu">
+                                <li><button className="dropdown-item btn btn-primary" >Edit</button></li>
+                                <li><button className="dropdown-item btn btn-primary" onClick={() => onDelete(reminder.id)} >Delete</button></li>
+                                <li><button className="dropdown-item btn btn-primary disabled" >Other...</button></li>
+                            </ul>
+                        </div>
                     </div>
                 </li>
             ))}

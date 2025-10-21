@@ -1,30 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-function EditTask({ show, task, onUpdate, onClose }) {
-  const [text, setText] = useState("");
-
-  useEffect(() => {
-    if (task) setText(task.text);
-  }, [task]);
+function TaskCreate({ show, onCreate, onClose, task = "" }) {
+  const [text, setText] = useState(task);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (text.trim() === "") return;
-    onUpdate(task.id, text);
+
+    onCreate(text);
+    setText("");
     onClose();
   };
 
   return (
     <Modal show={show} onHide={onClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Task</Modal.Title>
+        <Modal.Title>Add New Task</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="editTaskInput">
+          <Form.Group controlId="taskInput">
             <Form.Control
               type="text"
+              placeholder="Enter a task..."
               value={text}
               onChange={(e) => setText(e.target.value)}
               autoFocus
@@ -35,7 +34,7 @@ function EditTask({ show, task, onUpdate, onClose }) {
               Cancel
             </Button>
             <Button variant="primary" type="submit">
-              Save Changes
+              Add Task
             </Button>
           </div>
         </Form>
@@ -44,4 +43,4 @@ function EditTask({ show, task, onUpdate, onClose }) {
   );
 }
 
-export default EditTask;
+export default TaskCreate;
