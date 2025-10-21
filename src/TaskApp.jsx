@@ -1,6 +1,6 @@
 import TaskList from "./TaskList";
-import CreateTask from "./CreateTask";
-import EditTask from "./EditTask";
+import TaskCreate from "./TaskCreate";
+import TaskEdit from "./TaskEdit";
 import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -73,13 +73,13 @@ function TaskApp() {
                     </Button>
                 </div>
 
-                <CreateTask
+                <TaskCreate
                     show={showCreate}
                     onCreate={handleCreateTask}
                     onClose={() => setShowCreate(false)}
                 />
 
-                <EditTask
+                <TaskEdit
                     show={showEdit}
                     task={currentTask}
                     onUpdate={handleUpdateTask}
