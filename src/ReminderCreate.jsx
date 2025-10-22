@@ -30,18 +30,22 @@ function ReminderCreate({ onClose, onAdd, show }) {
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
-                        <Form.Control
-                            type="text"
-                            placeholder="Enter a reminder..."
-                            value={text}
-                            onChange={(e) => setText(e.target.value)}
-                            autoFocus
-                        />
+                        <div className="mb-3">
+                            <Form.Control 
+                                type="text"
+                                placeholder="Enter a reminder..."
+                                value={text}
+                                onChange={(e) => setText(e.target.value)}
+                                autoFocus
+                            />
+                        </div>
+                        <div className="mb-5">
                         <Form.Control
                             type="datetime-local"
                             value={dateTime}
                             onChange={(e) => setDateTime(e.target.value)}
                         />
+                        </div>
                     </Form.Group>
                     <div className="d-flex justify-content-end mt-3">
                         <Button onClick={onClose} className="me-2" variant="secondary">Cancel</Button>
