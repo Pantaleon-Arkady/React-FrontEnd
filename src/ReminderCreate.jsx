@@ -28,7 +28,7 @@ function ReminderCreate({ onClose, onAdd, show }) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <Form.Group>
                         <Form.Control
                             type="text"

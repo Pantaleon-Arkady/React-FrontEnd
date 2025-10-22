@@ -59,7 +59,7 @@ function ReminderApp() {
                 <ReminderCreate
                     show={showCreate}
                     onAdd={handleCreateReminder}
-                    onClose={setShowCreate(false)}
+                    onClose={() => setShowCreate(false)}
                 />
                 <ReminderEdit />
                 <button
