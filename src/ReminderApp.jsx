@@ -24,6 +24,21 @@ function ReminderApp() {
     }, [reminders]);
 
     const [showCreate, setShowCreate] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+    const [currentReminder, setCurrentReminder] = useState(null);
+
+    const handleCreateReminder = (reminder) => {
+        setReminders([...reminders, reminder]);
+    };
+
+    const handleEditClick = (reminder) => {
+        setCurrentReminder(reminder);
+        setShowEdit(true);
+    }
+
+    const handleUpdateReminder = (updatedReminder) => {
+        setReminders(reminders.map(r => r.id === updatedReminder.id ? updatedReminder : r));
+    };
 
     const handleDeleteReminder = (reminderId) => {
         setReminders(reminders.filter((reminder) => reminder.id !== reminderId))
@@ -33,10 +48,6 @@ function ReminderApp() {
         setReminders(defaultReminders);
         localStorage.removeItem('reminders');
     }
-
-    const handleCreateReminder = (reminder) => {
-        setReminders([...reminders, reminder]);
-    };
 
     return (
         <div>
@@ -55,13 +66,19 @@ function ReminderApp() {
                 <ReminderList
                     reminders={reminders}
                     onDelete={handleDeleteReminder}
+                    onEdit={handleEditClick}
                 />
                 <ReminderCreate
                     show={showCreate}
                     onAdd={handleCreateReminder}
                     onClose={() => setShowCreate(false)}
                 />
-                <ReminderEdit />
+                <ReminderEdit
+                    show={showEdit}
+                    onClose={() => setShowEdit(false)}
+                    reminder={currentReminder}
+                    onUpdate={handleUpdateReminder}
+                />
                 <button
                     onClick={() => resetReminder()}
                     className="btn btn-warning"
