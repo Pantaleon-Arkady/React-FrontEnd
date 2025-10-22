@@ -1,4 +1,6 @@
-function ReminderList({ reminders, onDelete }) {
+import { Button } from "react-bootstrap";
+
+function ReminderList({ reminders, onDelete, onEdit }) {
 
 
 
@@ -20,7 +22,7 @@ function ReminderList({ reminders, onDelete }) {
                                 Mod
                             </button>
                             <ul className="dropdown-menu">
-                                <li><button className="dropdown-item btn btn-primary" >Edit</button></li>
+                                <li><button className="dropdown-item btn btn-primary" onClick={() => onEdit(reminder)} >Edit</button></li>
                                 <li><button className="dropdown-item btn btn-primary" onClick={() => onDelete(reminder.id)} >Delete</button></li>
                                 <li><button className="dropdown-item btn btn-primary disabled" >Other...</button></li>
                             </ul>
