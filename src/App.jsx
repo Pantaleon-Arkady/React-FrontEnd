@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './App.css';
-import TaskApp from "./TaskApp";
-import ReminderApp from "./ReminderApp";
+import TaskApp from "./components/TaskApp";
+import ReminderApp from "./components/ReminderApp";
 
 function Home() {
     return (
