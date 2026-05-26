@@ -1,13 +1,16 @@
 import { Button } from "react-bootstrap";
 
-function ReminderList({ reminders, onDelete, onEdit }) {
+function ReminderList({ reminders, setReminders, onDelete, onEdit }) {
 
 
 
     return (
         <ul className="list-group mt-3">
             {reminders.map(reminder => (
-                <li className="list-group-item d-flex">
+                <li 
+                    className="list-group-item d-flex"
+                    draggable
+                >
                     <div className="reminders_text border text-start">
                         <span className="border">
                             {reminder.text}
