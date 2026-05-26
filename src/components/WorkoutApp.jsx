@@ -10,6 +10,25 @@ function WorkoutApp() {
         )
     }
 
+    const dragStart = (e, id) => {
+        e.dataTransfer.setData("draggedDiv", id)
+        console.log("div being dragged")
+    }
+
+    const dragOver = (e) => {
+        e.preventDefault();
+    }
+
+    const dragDrop = (e) => {
+        e.preventDefault();
+
+        const draggedElement = e.dataTransfer.getData("draggedDiv");
+
+        const element = document.getElementById(draggedElement);
+
+        e.currentTarget.appendChild(element);
+    }
+
     return (
         <div className="workout_main_div d-flex flex-column">
             <div className="w-100 p-3 border d-flex flex-row justify-content-between">
@@ -26,7 +45,22 @@ function WorkoutApp() {
                 <div className="w-25 border d-flex flex-column content_divs">
                     {leftFeatures}
                 </div>
-                <div className="w-50 border content_divs">Main</div>
+                <div className="w-50 border content_divs p-4">
+                    <div 
+                        className="h-25 w-100 border p-3"
+                        onDragOver={dragOver}
+                        onDrop={dragDrop}
+                    >
+                    </div>
+                    <div 
+                        className="border rounded w-100 h-25 mt-4" 
+                        draggable
+                        id="dragDiv"
+                        onDragStart={(e) => dragStart(e, "dragDiv")}
+                    >
+                        Draggable Div
+                    </div>
+                </div>
                 <div className="w-25 border content_divs">Right</div>
             </div>
         </div>
