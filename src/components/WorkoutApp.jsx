@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 function WorkoutApp() {
+    const [dragged, setDragged] = useState(false);
+    const [beingDragged, setBeingDragged] = useState(false);
 
     const leftFeatures = [];
 
@@ -17,6 +21,7 @@ function WorkoutApp() {
 
     const dragOver = (e) => {
         e.preventDefault();
+        setBeingDragged(true);
     }
 
     const dragDrop = (e) => {
@@ -27,6 +32,15 @@ function WorkoutApp() {
         const element = document.getElementById(draggedElement);
 
         e.currentTarget.appendChild(element);
+        setDragged(true);
+    }
+
+    if (dragged) {
+        console.log("div dragged");
+    }
+
+    if (beingDragged) {
+        console.log("div being dragged over the placing div *separate logic");
     }
 
     return (
