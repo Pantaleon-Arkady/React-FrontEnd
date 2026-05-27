@@ -14,6 +14,17 @@ function WorkoutApp() {
         )
     }
 
+    const squares = [];
+    const colors = ["danger", "success", "warning", "primary"];
+
+    for (let sqr = 0; sqr < colors.length; sqr++) {
+        squares.push(
+            <div key={sqr} className={`sub_squares bg-${colors[sqr]}`} draggable>
+                Square {sqr +1}
+            </div>
+        )
+    }
+
     const dragStart = (e, id) => {
         e.dataTransfer.setData("draggedDiv", id)
         console.log("div being dragged")
@@ -73,6 +84,10 @@ function WorkoutApp() {
                         onDragStart={(e) => dragStart(e, "dragDiv")}
                     >
                         Draggable Div
+                    </div>
+
+                    <div className="main_square bg-light">
+                        {squares}
                     </div>
                 </div>
                 <div className="w-25 border content_divs">Right</div>
