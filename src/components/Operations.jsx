@@ -2,6 +2,16 @@ import { Link } from "react-router-dom";
 
 function Operation() {
 
+    const range = (start, end, step = 1) => {
+        Array.from()
+    }
+
+    const numbers = [];
+
+    for (let num = 1; num < 10; num++) {
+        numbers.push(num);
+    }
+
     return (
         <div>
             <div className="w-100 d-flex flex-row justify-content-between">
@@ -17,11 +27,22 @@ function Operation() {
             </div>
             <div className="w-100 border d-flex flex-column p-5">
                 <div className="w-100 border d-flex flex-row">
-                    <div className="w-75 border">
-                        Numbers
+                    <div className="w-75 border d-flex flex-row justify-content-around">
+                    {numbers.map((number) => (
+                        <div 
+                            key={number}
+                            className="border py-1 px-3 rounded"
+                            draggable
+                        >
+                            {number}
+                        </div>
+                    ))}
                     </div>
                     <div className="w-25 border">
-                        Operations
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
                 </div>
                 <div className="w-100 border d-flex flex-row p-2 mt-5">
