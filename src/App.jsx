@@ -3,6 +3,7 @@ import './App.css';
 import TaskApp from "./components/TaskApp";
 import ReminderApp from "./components/ReminderApp";
 import WorkoutApp from "./components/WorkoutApp";
+import Operation from "./components/Operations";
 
 function Home() {
     return (
@@ -11,6 +12,7 @@ function Home() {
             <Link to="/task-app" className="btn btn-primary m-2" >Task App</Link>
             <Link to="/reminder-app" className="btn btn-primary m-2" >Reminder App</Link>
             <Link to="/workout-app" className="btn btn-primary m-2">Workout App</Link>
+            <Link to="/operation-app" className="btn btn-primary m-2">Operation App</Link>
         </div>
     )
 }
@@ -23,6 +25,7 @@ function App() {
                 <Route path="/task-app" element={<TaskApp/>} />
                 <Route path="/reminder-app" element={<ReminderApp/>} />
                 <Route path="/workout-app" element={<WorkoutApp />} />
+                <Route path="/operation-app" element={<Operation />} />
             </Routes>
         </Router>
     )
