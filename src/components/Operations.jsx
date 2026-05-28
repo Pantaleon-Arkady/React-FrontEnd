@@ -4,7 +4,7 @@ import { useState } from "react";
 function Operation() {
     const [firstNumber, setFirstNumber] = useState();
     const [secondNumber, setSecondNumber] = useState();
-    const [operation, setOperation] = useState();
+    const [basicOperation, setBasicOperation] = useState();
 
     const range = (start, end, step = 1) => {
         Array.from()
@@ -22,7 +22,7 @@ function Operation() {
         console.log("dragging number: " + number) 
     }
 
-    const numberDragOver = (ev) => {
+    const elementDragOver = (ev) => {
         ev.preventDefault();
     }
 
@@ -34,6 +34,22 @@ function Operation() {
         console.log("first Number: " + firstNumberData);
 
         setFirstNumber(firstNumberData);
+    }
+
+    const secondNumberDrop = (ev) => {
+        ev.preventDefault();
+
+        const numberValue = ev.dataTransfer.getData("draggedNumber");
+
+        console.log("second Number: " + numberValue);
+
+        setSecondNumber(numberValue);
+    }
+
+    const dragOperation = (ev, operation) => {
+        ev.dataTransfer.setData("draggedOperation", operation)
+
+        console.log("dragging operation: " + operation)
     }
 
     return (
@@ -67,40 +83,57 @@ function Operation() {
                         <div 
                             className="border px-3 py-2"
                             draggable
+                            onDragStart={(ev) => dragOperation(ev, "+")}
                         >
                             +
                         </div>
                         <div 
                             className="border px-3 py-2"
                             draggable
+                            onDragStart={(ev) => dragOperation(ev, "-")}
                         >
                             -
                         </div>
                         <div 
                             className="border px-3 py-2"
                             draggable
+                            onDragStart={(ev) => dragOperation(ev, "*")}
                         >
                             *
                         </div>
                         <div 
                             className="border px-3 py-2"
                             draggable
+                            onDragStart={(ev) => dragOperation(ev, "/")}
                         >
                             /
                         </div>
                     </div>
                 </div>
                 <div className="w-100 border d-flex flex-row p-2 mt-5">
-                    <div 
+                    <div
                         className="w-25 border"
-                        onDragOver={numberDragOver}
+                        onDragOver={elementDragOver}
                         onDrop={(ev) => firstNumberDrop(ev)}
                     >
                         {firstNumber ? firstNumber : "Drag a Number"}
                     </div>
-                    <div className="w-25 border">Operation</div>
-                    <div className="w-25 border">Number</div>
-                    <div className="w-25 border">Result</div>
+                    <div
+                        className="w-25 border"
+                        onDragOver={elementDragOver}
+                    >
+                        {basicOperation ? basicOperation : "drag an operation"}
+                    </div>
+                    <div
+                        className="w-25 border"
+                        onDragOver={elementDragOver}
+                        onDrop={(ev) => secondNumberDrop(ev)}
+                    >
+                        {secondNumber ? secondNumber : "drag a second number"}
+                    </div>
+                    <div className="w-25 border">
+                        Answer
+                    </div>
                 </div>
             </div>
         </div>
