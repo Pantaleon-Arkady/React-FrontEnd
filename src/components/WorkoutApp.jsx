@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function WorkoutApp() {
     const [dragged, setDragged] = useState(false);
@@ -92,16 +93,18 @@ function WorkoutApp() {
                     Workout App
                 </div>
                 <div className="w-50 border d-flex flex-row justify-content-end">
-                    <button className="btn btn-primary me-2">Features</button>
+                    <Link to="/" className="btn btn-primary me-2">
+                        Back
+                    </Link>
                     <button className="btn btn-primary me-2">Features</button>
                     <button className="btn btn-primary me-2">Features</button>
                 </div>
             </div>
             <div className="w-100 d-flex workout_contents">
-                <div className="w-25 border d-flex flex-column content_divs">
+                <div className="w-25 border content_divs">
                     {leftFeatures}
                 </div>
-                <div className="w-50 border content_divs p-4">
+                <div className="w-50 border content_divs">
                     <div 
                         className="h-25 w-100 border p-3"
                         onDragOver={dragOver}
@@ -119,6 +122,10 @@ function WorkoutApp() {
 
                     <div className="main_square bg-light">
                         {squares}
+                    </div>
+
+                    <div className="w-100 border mt-5 p-5">
+                        Operations
                     </div>
                 </div>
                 <div className="w-25 border content_divs">Right</div>
