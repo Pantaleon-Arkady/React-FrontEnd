@@ -26,6 +26,16 @@ function Operation() {
         ev.preventDefault();
     }
 
+    const firstNumberDrop = (ev) => {
+        ev.preventDefault();
+
+        const firstNumberData = ev.dataTransfer.getData("draggedNumber");
+
+        console.log("first Number: " + firstNumberData);
+
+        setFirstNumber(firstNumberData);
+    }
+
     return (
         <div>
             <div className="w-100 d-flex flex-row justify-content-between">
@@ -84,6 +94,7 @@ function Operation() {
                     <div 
                         className="w-25 border"
                         onDragOver={numberDragOver}
+                        onDrop={(ev) => firstNumberDrop(ev)}
                     >
                         {firstNumber ? firstNumber : "Drag a Number"}
                     </div>
