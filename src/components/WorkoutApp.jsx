@@ -50,7 +50,7 @@ function WorkoutApp() {
                 id={`square-${sqr + 1}`}
                 onDragStart={(ev) => squareDragStart(ev, sqr)}
                 onDragOver={squareDragOver}
-                onDrop={dropSquare}
+                onDrop={(ev) => dropSquare(ev, sqr)}
             >
                 Square {sqr +1}
             </div>
