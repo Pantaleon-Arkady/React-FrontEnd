@@ -15,7 +15,30 @@ function WorkoutApp() {
     }
 
     const squares = [];
-    const colors = ["danger", "success", "warning", "primary"];
+    const [colors, setColors] = useState(["danger", "success", "warning", "primary"]);
+
+    const squareDragStart = (ev, index) => {
+        ev.dataTransfer.setData("draggedDiv", index);
+    }
+
+    const squareDragOver = (ev) => {
+        ev.preventDefault();
+        // console.log("the square is being dragged OVER") its looping!!!
+    }
+
+    const dropSquare = (e, dropIndex) => {
+        const draggedIndex = e.dataTransfer.getData("draggedDiv");
+    
+        const updatedSquares = [...colors];
+    
+        const draggedSquare = updatedSquares[draggedIndex];
+    
+        updatedSquares.splice(draggedIndex, 1);
+    
+        updatedSquares.splice(dropIndex, 0, draggedSquare);
+    
+        setColors(updatedSquares);
+    }
 
     for (let sqr = 0; sqr < colors.length; sqr++) {
         squares.push(
@@ -24,19 +47,14 @@ function WorkoutApp() {
                 className={`sub_squares bg-${colors[sqr]}`} 
                 draggable
                 id={`square-${sqr + 1}`}
-                onDragStart={(ev) => squareDragStart(ev, `square-${sqr + 1}`)}
+                onDragStart={(ev) => squareDragStart(ev, sqr)}
+                onDragOver={squareDragOver}
+                onDrop={dropSquare}
             >
                 Square {sqr +1}
             </div>
         )
     }
-
-    const squareDragStart = (ev, index) => {
-        ev.dataTransfer.setData("draggedSquare", index)
-        console.log(index + " is being dragged")
-    }
-
-
 
     const dragStart = (e, id) => {
         e.dataTransfer.setData("draggedDiv", id)
