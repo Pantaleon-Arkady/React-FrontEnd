@@ -4,6 +4,7 @@ import TaskApp from "./components/TaskApp";
 import ReminderApp from "./components/ReminderApp";
 import WorkoutApp from "./components/WorkoutApp";
 import Operation from "./components/Operations";
+import Trials from "./components/Trials";
 
 function Home() {
     return (
@@ -13,6 +14,7 @@ function Home() {
             <Link to="/reminder-app" className="btn btn-primary m-2" >Reminder App</Link>
             <Link to="/workout-app" className="btn btn-primary m-2">Workout App</Link>
             <Link to="/operation-app" className="btn btn-primary m-2">Operation App</Link>
+            <Link to="/trials" className="btn btn-primary m2">Trials </Link>
         </div>
     )
 }
@@ -26,6 +28,7 @@ function App() {
                 <Route path="/reminder-app" element={<ReminderApp/>} />
                 <Route path="/workout-app" element={<WorkoutApp />} />
                 <Route path="/operation-app" element={<Operation />} />
+                <Route path="/trials" element={<Trials />} />
             </Routes>
         </Router>
     )
