@@ -1,6 +1,6 @@
 import TaskList from "./TaskList";
-import TaskCreate from "./TaskCreate";
-import TaskEdit from "./TaskEdit";
+import TaskCreate from "../forms/TaskCreate";
+import TaskEdit from "../forms/TaskEdit";
 import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";

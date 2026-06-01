@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import ReminderList from "./ReminderList";
-import ReminderCreate from "./ReminderCreate";
-import ReminderEdit from "./ReminderEdit";
+import ReminderCreate from "../forms/ReminderCreate";
+import ReminderEdit from "../forms/ReminderEdit";
 
 function ReminderApp() {
     const defaultReminders = [

@@ -1,16 +1,7 @@
-:root {
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
-
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+* {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -24,16 +15,6 @@ body {
     border-radius: "50%";
 }
 
-
-@media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
-    }
-}
-
-/* Reminders */
-
 .reminders_text {
     width: 70%;
 }
@@ -44,4 +25,49 @@ body {
 
 .reminders_mod {
     width: 10%;
+}
+
+/* WORKOUTS */
+
+.workout_main_div {
+    max-height: 100dvh;
+}
+
+.content_divs {
+    overflow-y: auto;
+    min-height: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.workout_contents {
+    flex: 1;
+    min-height: 0;
+}
+
+.main_square {
+    width: 50%;
+    aspect-ratio: 1/1;
+
+    border: 2px solid lightgray;
+    border-radius: 15px;
+
+    padding: 10px;
+    margin-top: 15px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.sub_squares {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
 }
