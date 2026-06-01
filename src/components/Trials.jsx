@@ -16,6 +16,15 @@ function Trials() {
         setFruit("");
     };
 
+    const initialUndefined = () => {
+        if (typeof unVariable === 'undefined') {
+            const unVariable = "Initially undefined";
+            console.log(unVariable)
+        } else {
+            console.log("It is already defined")
+        }
+    }
+
     return (
         <div>
             <input
@@ -30,6 +39,13 @@ function Trials() {
                 onClick={() => addFruit(fruit)}
             >
                 Add Fruit
+            </button>
+
+            <button 
+                onClick={initialUndefined}
+                className="btn btn-warning"
+            >
+                Undefined
             </button>
 
             {fruits.map((fruit, index) => (
