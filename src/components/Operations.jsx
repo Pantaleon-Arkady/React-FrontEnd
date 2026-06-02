@@ -5,6 +5,7 @@ function Operation() {
     const [firstNumber, setFirstNumber] = useState();
     const [secondNumber, setSecondNumber] = useState();
     const [basicOperation, setBasicOperation] = useState();
+    const [answer, setAnswer] = useState();
 
     const range = (start, end, step = 1) => {
         Array.from()
@@ -50,6 +51,70 @@ function Operation() {
         ev.dataTransfer.setData("draggedOperation", operation)
 
         console.log("dragging operation: " + operation)
+    }
+
+    const operationDrop = (ev) => {
+        ev.preventDefault();
+
+        const draggedOperation = ev.dataTransfer.getData("draggedOperation");
+
+        console.log("chosen operation: " + draggedOperation);
+
+        setBasicOperation(draggedOperation);
+    }
+
+    const solveEquation = () => {
+        console.log(firstNumber, typeof firstNumber);
+        console.log(secondNumber, typeof secondNumber);
+        console.log(basicOperation, typeof basicOperation);
+    
+        if (firstNumber && basicOperation && secondNumber) {
+    
+            const first = Number(firstNumber);
+            const second = Number(secondNumber);
+    
+            let result;
+
+            // if (basicOperation === "+") {
+            //     result = first + second;
+            // } else if (basicOperation === "-") {
+            //     result = first - second;
+            // } else if (basicOperation === "*") {
+            //     result = first * second;
+            // } else if (basicOperation === "/") {
+            //     result = first / second;
+            // } else {
+            //     result = "Invalid Operation";
+            // }
+    
+            switch (basicOperation) {
+                case "+":
+                    result = first + second;
+                    break;
+    
+                case "-":
+                    result = first - second;
+                    break;
+    
+                case "*":
+                    result = first * second;
+                    break;
+    
+                case "/":
+                    result = first / second;
+                    break;
+    
+                default:
+                    result = "Invalid Operation";
+            }
+    
+            console.log("Result:", result);
+
+            setAnswer(result);
+    
+        } else {
+            console.log("drag properly first before solving");
+        }
     }
 
     return (
@@ -121,6 +186,7 @@ function Operation() {
                     <div
                         className="w-25 border"
                         onDragOver={elementDragOver}
+                        onDrop={(ev) => operationDrop(ev)}
                     >
                         {basicOperation ? basicOperation : "drag an operation"}
                     </div>
@@ -132,7 +198,15 @@ function Operation() {
                         {secondNumber ? secondNumber : "drag a second number"}
                     </div>
                     <div className="w-25 border">
-                        Answer
+                        <button 
+                            onClick={() => solveEquation()}
+                            className="btn btn-success"
+                        >
+                            Solve
+                        </button>
+                        <div>
+                            {answer ? answer : ""}
+                        </div>
                     </div>
                 </div>
             </div>
