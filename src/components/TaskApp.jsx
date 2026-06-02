@@ -25,6 +25,7 @@ function TaskApp() {
     const [showCreate, setShowCreate] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [currentTask, setCurrentTask] = useState(null);
+    const [darkMode, isDarkMode] = useState(false);
 
     const handleCreateTask = (text) => {
         const newTask = { id: Date.now(), text };
@@ -50,13 +51,16 @@ function TaskApp() {
     };
 
     return (
-        <div>
-            <div className="d-flex">
+        <div className={`w-100 px-5 py-3 ${darkMode ? "bg-black" : "bg-white"}`}>
+            <div className="d-flex flex-row justify-content-between">
                 <Link to="/" className="btn btn-primary">
                     Back
                 </Link>
+                <button className={`btn ${darkMode ? "btn-light" : "btn-dark"}`} onClick={() => isDarkMode(!darkMode)}>
+                    {darkMode? "Ligt Mode" : "Dark Mode"}
+                </button>
             </div>
-            <div className="container my-4 bg-light w-100 p-3 rounded">
+            <div className={`container my-4 ${darkMode ? "bg-dark text-white" : "bg-light text-black"} w-100 p-3 rounded`}>
                 <h2 className="text-center mb-3">Task List</h2>
 
                 <div className="d-flex justify-content-center mb-3">
@@ -65,7 +69,12 @@ function TaskApp() {
                     </Button>
                 </div>
 
-                <TaskList tasks={tasks} onDelete={handleDeleteTask} onEdit={handleEditClick} />
+                <TaskList
+                    tasks={tasks}
+                    setTasks={setTasks}
+                    onDelete={handleDeleteTask}
+                    onEdit={handleEditClick}
+                />
 
                 <div className="text-center mt-3">
                     <Button variant="warning" onClick={resetTasks}>
