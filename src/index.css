@@ -71,3 +71,11 @@ body {
     border: 1px solid black;
     border-radius: 10px;
 }
+
+/* Layout Pages */
+
+/* First Layout */
+
+.first_header {
+    height: 8vh;
+}
