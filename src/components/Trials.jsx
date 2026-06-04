@@ -17,11 +17,22 @@ function Trials() {
     ]
 
     const scoreReducer = (state, action) => {
-        switch(action.type) {
+        switch (action.type) {
             case "INCREASE":
                 return state.map((team) => {
                     if (team.id === action.id) {
-                        return {...team, score: team.score + 1}
+                        return { ...team, score: team.score + 1 }
+                    } else {
+                        return team;
+                    }
+                })
+
+            case "DECREASE":
+                return state.map((team) => {
+                    if (team.score === 0) {
+                        return team;
+                    } if (team.id === action.id) {
+                        return { ...team, score: team.score - 1 }
                     } else {
                         return team;
                     }
@@ -31,8 +42,12 @@ function Trials() {
 
     const [score, dispatch] = useReducer(scoreReducer, initialTeamScore);
 
-    const handleScore = (team) => {
-        dispatch({ type: "INCREASE", id: team.id})
+    const handleScoreInc = (team) => {
+        dispatch({ type: "INCREASE", id: team.id })
+    };
+
+    const handleScoreDec = (team) => {
+        dispatch({ type: "DECREASE", id: team.id })
     };
 
     const [fruits, setFruits] = useState([
@@ -84,7 +99,7 @@ function Trials() {
                 Add fruit by concat
             </button>
 
-            <button 
+            <button
                 onClick={initialUndefined}
                 className="btn btn-warning"
             >
@@ -97,21 +112,38 @@ function Trials() {
                 </div>
             ))}
 
-            {score.map((team) => {
-                return (
-                    <div key={team.id}>
-                        <label>
-                            <button
-                                className="btn btn-primary"
-                                onClick={() => handleScore(team)}
-                                value={team.name}
-                            >
+            <div className="w-50 border d-flex flex-row">
+                {score.map((team) => {
+                    return (
+                        <div
+                            key={team.id}
+                            className="w-50 p-2"
+                        >
+                            <div className="w-100 border-bottom">
                                 {team.name} - {team.score}
-                            </button>
-                        </label>
-                    </div>
-                )
-            })}
+                            </div>
+                            <label>
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={() => handleScoreInc(team)}
+                                    value={team.name}
+                                >
+                                    Add Score
+                                </button>
+                            </label>
+                            <label>
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={() => handleScoreDec(team)}
+                                    value={team.name}
+                                >
+                                    Minus Score
+                                </button>
+                            </label>
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     );
 }
