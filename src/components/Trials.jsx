@@ -10,9 +10,12 @@ function Trials() {
     ]);
 
     const addFruit = (fruitToAdd) => {
-        if (!fruitToAdd.trim()) return;
+        setFruits([...fruits, fruitToAdd]);
+        setFruit("");
+    };
 
-        setFruits(prev => [...prev, fruitToAdd]);
+    const concatFruit = (fruitToAdd) => {
+        setFruits(fruits.concat(fruitToAdd));
         setFruit("");
     };
 
@@ -21,14 +24,15 @@ function Trials() {
             const unVariable = "Initially undefined";
             console.log(unVariable)
         } else {
-            console.log("It is already defined")
-        }
-    }
+            console.log("It is already defined");
+        };
+    };
 
     return (
         <div>
             <input
-                className="form-control"
+                className="form-control w-25 m-3 border border-2"
+                placeholder="type a fruit..."
                 type="text"
                 value={fruit}
                 onChange={(e) => setFruit(e.target.value)}
@@ -38,7 +42,14 @@ function Trials() {
                 className="btn btn-success"
                 onClick={() => addFruit(fruit)}
             >
-                Add Fruit
+                Add Fruit by spread
+            </button>
+
+            <button
+                className="btn btn-success"
+                onClick={() => concatFruit(fruit)}
+            >
+                Add fruit by concat
             </button>
 
             <button 
