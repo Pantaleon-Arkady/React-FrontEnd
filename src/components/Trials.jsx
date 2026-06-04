@@ -1,7 +1,39 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 
 function Trials() {
     const [fruit, setFruit] = useState("");
+
+    const initialTeamScore = [
+        {
+            id: 1,
+            score: 0,
+            name: "Spurs"
+        },
+        {
+            id: 2,
+            score: 0,
+            name: "Knicks"
+        }
+    ]
+
+    const scoreReducer = (state, action) => {
+        switch(action.type) {
+            case "INCREASE":
+                return state.map((team) => {
+                    if (team.id === action.id) {
+                        return {...team, score: team.score + 1}
+                    } else {
+                        return team;
+                    }
+                })
+        }
+    }
+
+    const [score, dispatch] = useReducer(scoreReducer, initialTeamScore);
+
+    const handleScore = (team) => {
+        dispatch({ type: "INCREASE", id: team.id})
+    };
 
     const [fruits, setFruits] = useState([
         "apple",
@@ -64,6 +96,22 @@ function Trials() {
                     {fruit}
                 </div>
             ))}
+
+            {score.map((team) => {
+                return (
+                    <div key={team.id}>
+                        <label>
+                            <button
+                                className="btn btn-primary"
+                                onClick={() => handleScore(team)}
+                                value={team.name}
+                            >
+                                {team.name} - {team.score}
+                            </button>
+                        </label>
+                    </div>
+                )
+            })}
         </div>
     );
 }
