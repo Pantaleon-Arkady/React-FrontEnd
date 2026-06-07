@@ -6,6 +6,7 @@ import WorkoutApp from "./components/WorkoutApp";
 import Operation from "./components/Operations";
 import Trials from "./components/Trials";
 import FirstLayout from "./components/FirstLayout";
+import ThemeApp from "./components/ThemeApp";
 
 function Home() {
     return (
@@ -23,6 +24,7 @@ function Home() {
                 <div className="d-flex w-25 flex-column p-5 m-3 bg-light rounded border border-2">
                     <h2>React JS Layouts</h2>
                     <Link to="/first-layout" className="btn btn-primary m-2">First Layout</Link>
+                    <Link to="/theme-layout" className="btn btn-primary m-2">Theme App</Link>
                 </div>
             </div>
         </div>
@@ -40,6 +42,7 @@ function App() {
                 <Route path="/operation-app" element={<Operation />} />
                 <Route path="/trials" element={<Trials />} />
                 <Route path="/first-layout" element={<FirstLayout />} />
+                <Route path="/theme-layout" element={<ThemeApp />} />
             </Routes>
         </Router>
     )
