@@ -1,7 +1,31 @@
-import { useState, useReducer } from "react";
+import { useState, useReducer, useActionState } from "react";
 
 function Trials() {
     const [fruit, setFruit] = useState("");
+    const [user, setUser] = useState("");
+
+    const [state, submitAction] = useActionState(
+        async (prevState, formData) => {
+            const username = formData.get("username");
+
+            if (!username) {
+                return {
+                    success: false,
+                    message: "Username is required"
+                };
+            }
+
+            setUser(username);
+            return {
+                success: true,
+                message: `Welcome ${username}!`
+            };
+        },
+        {
+            success: false,
+            message: ""
+        }
+    );
 
     const initialTeamScore = [
         {
@@ -77,6 +101,26 @@ function Trials() {
 
     return (
         <div>
+            <div className="w-100">
+                <div>
+                    {user ? "" : "Hello, please set a username"}
+                    <p>{state.message}</p>
+                </div>
+                <form action={submitAction}>
+                    <input
+                        type="text"
+                        name="username"
+                        className="form-control w-25"
+                    />
+
+                    <button
+                        type="submit"
+                        className="btn btn-success"
+                    >
+                        Save Username
+                    </button>
+                </form>
+            </div>
             <input
                 className="form-control w-25 m-3 border border-2"
                 placeholder="type a fruit..."
