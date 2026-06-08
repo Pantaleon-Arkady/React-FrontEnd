@@ -25,22 +25,25 @@ function TaskApp() {
     const [showCreate, setShowCreate] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [currentTask, setCurrentTask] = useState(null);
-    // const [darkMode, isDarkMode] = useState(false);
-
 
     const darkModeReducer = (state, action) => {
         switch (action.type) {
-            case "TOGGLE":
-                return !state;
-
             case "DARK":
                 return true;
-
+    
             case "LIGHT":
                 return false;
-
+    
             default:
                 return state;
+        }
+    };
+
+    const handleThemeChange = () => {
+        if (darkMode) {
+            dispatch({ type: "LIGHT" });
+        } else {
+            dispatch({ type: "DARK" });
         }
     };
 
@@ -77,7 +80,7 @@ function TaskApp() {
                 </Link>
                 <button
                     className={`btn ${darkMode ? "btn-light" : "btn-dark"}`}
-                    onClick={() => dispatch({ type: "TOGGLE" })}
+                    onClick={handleThemeChange}
                 >
                     {darkMode ? "Light Mode" : "Dark Mode"}
                 </button>
