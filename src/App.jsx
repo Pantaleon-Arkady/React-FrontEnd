@@ -7,6 +7,7 @@ import Operation from "./components/Operations";
 import Trials from "./components/Trials";
 import FirstLayout from "./components/FirstLayout";
 import ThemeApp from "./components/ThemeApp";
+import SecondLO from "./components/SecondLO";
 
 function Home() {
     return (
@@ -25,6 +26,7 @@ function Home() {
                     <h2>React JS Layouts</h2>
                     <Link to="/first-layout" className="btn btn-primary m-2">First Layout</Link>
                     <Link to="/theme-layout" className="btn btn-primary m-2">Theme App</Link>
+                    <Link to="/second-layout" className="btn btn-primary m-2">Second Layout</Link>
                 </div>
             </div>
         </div>
@@ -43,6 +45,7 @@ function App() {
                 <Route path="/trials" element={<Trials />} />
                 <Route path="/first-layout" element={<FirstLayout />} />
                 <Route path="/theme-layout" element={<ThemeApp />} />
+                <Route path="/second-layout" element={<SecondLO />} />
             </Routes>
         </Router>
     )
