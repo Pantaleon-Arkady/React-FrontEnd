@@ -8,6 +8,7 @@ import Trials from "./components/Trials";
 import FirstLayout from "./components/FirstLayout";
 import ThemeApp from "./components/ThemeApp";
 import SecondLO from "./components/SecondLO";
+import ScrollLayout from "./components/ScrollLayout";
 
 function Home() {
     return (
@@ -27,6 +28,7 @@ function Home() {
                     <Link to="/first-layout" className="btn btn-primary m-2">First Layout</Link>
                     <Link to="/theme-layout" className="btn btn-primary m-2">Theme App</Link>
                     <Link to="/second-layout" className="btn btn-primary m-2">Second Layout</Link>
+                    <Link to="/scroll-layout" className="btn btn-primary m-2">Scroll Layout</Link>
                 </div>
             </div>
         </div>
@@ -46,6 +48,7 @@ function App() {
                 <Route path="/first-layout" element={<FirstLayout />} />
                 <Route path="/theme-layout" element={<ThemeApp />} />
                 <Route path="/second-layout" element={<SecondLO />} />
+                <Route path="/scroll-layout" element={<ScrollLayout />} />
             </Routes>
         </Router>
     )
