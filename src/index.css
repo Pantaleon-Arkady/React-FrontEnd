@@ -103,15 +103,24 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
+    background-color: rgb(245, 244, 242);
 }
 
 .second_left_content {
+    border: 2px solid lightgray;
+    border-radius: 5px;
     width: 220px;
     aspect-ratio: 1/1.25;
     margin: 20px;
+    background-color: white;
 }
 
-
+.second_right_content {
+    font-size: 0.85rem;
+    text-align: justify;
+    padding: 5px;
+    margin: 10px;
+}
 
 @media (min-width: 801px) {
 
@@ -138,6 +147,7 @@ body {
     .second_right_content {
         width: 75%;
         margin: 20px;
+        font-size: 1rem;
     }
 
 }
