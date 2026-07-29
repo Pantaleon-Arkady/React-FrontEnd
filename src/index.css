@@ -84,7 +84,7 @@ body {
     height: 8vh;
 }
 
-/* Second Layout */
+/* Scroll Layout */
 
 .second_header {
     width: 100%;
@@ -94,31 +94,50 @@ body {
 }
 
 .second_content_divs {
-    height: calc(100vh - 70px);
+    min-height: calc(100vh - 70px);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .second_left_content_div {
-    width: 45%;
+    width: 100%;
     display: flex;
-    justify-content: end;
-    align-items: center;
+    justify-content: center;
 }
 
 .second_left_content {
-    width: 50%;
+    width: 220px;
     aspect-ratio: 1/1.25;
     margin: 20px;
 }
 
-.second_right_content_div {
-    width: 55%;
-    display: flex;
-}
 
-.second_right_content {
-    width: 75%;
-    aspect-ratio: 1/0.5;
-    margin: 20px;
+
+@media (min-width: 801px) {
+
+    .second_content_divs {
+        flex-direction: row;
+    }
+
+    .second_left_content_div {
+        width: 45%;
+        justify-content: end;
+        align-items: center;
+    }
+
+    .second_left_content {
+        width: 300px;
+    }
+    
+    .second_right_content_div {
+        width: 55%;
+        display: flex;
+        align-items: center;
+    }
+    
+    .second_right_content {
+        width: 75%;
+        margin: 20px;
+    }
+
 }
